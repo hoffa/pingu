@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -eo pipefail
 
 source ~/.pingurc
 
@@ -13,7 +12,7 @@ if [ "${status}" -eq 0 ]; then
     emoji="All good! :ok_hand:"
 else
     color=danger
-    emoji="Seems there were some issues... :thinking_face:"
+    emoji="Exited with code ${status}... :thinking_face:"
 fi
 
 echo " 
@@ -25,17 +24,9 @@ echo "
         {
             'text': 'Finished in ${diff} seconds. ${emoji} ${mention}',
             'color': '${color}',
+            'footer': '$(hostname)',
+            'ts': '${start}',
             'fields': [
-                {
-                    'title': 'Hostname',
-                    'value': '$(hostname)',
-                    'short': true
-                },
-                {
-                    'title': 'Status',
-                    'value': '${status}',
-                    'short': true
-                },
                 {
                     'title': 'Command',
                     'value': '\`${command}\`',
