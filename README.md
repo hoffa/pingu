@@ -1,6 +1,8 @@
+![Screenshot](https://i.imgur.com/UQkOL9l.png)
+
 # 🐧 pingu
 
-I often work on the go through SSH. `pingu` is a tiny tool that notifies you when a process finishes.
+I often work on the go through SSH, and like to know when my processes finish. `pingu` helps with that.
 
 ## Install
 
