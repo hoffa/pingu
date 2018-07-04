@@ -38,4 +38,4 @@ echo "
         }
     ]
 }
-" | tr "'" '"' | curl -Ld @- "${webhook}"
+" | tr "'" '"' | curl -sSLd @- "${webhook}"
