@@ -15,7 +15,6 @@ else
     color=danger
     text="${text} Exited with code ${status}... :thinking_face:"
 fi
-text="${text} ${mention}"
 
 echo " 
 {
