@@ -1,20 +1,47 @@
 #!/bin/sh
 
+source ~/.pingurc
+
+start=$(date +%s)
+command=$@
 "$@"
 status=$?
+diff=$(echo "$(date +%s) - ${start}" | bc)
 if [ "${status}" -eq 0 ]; then
     color=good
+    emoji="All good! :ok_hand:"
 else
     color=danger
+    emoji="Seems there were some issues... :thinking_face:"
 fi
-source ~/.btwrc
+
 echo " 
 {
     'username': 'pingu', 
     'channel': '${channel}',
     'icon_emoji': ':penguin:',
-    'attachments': [{
-        'text': 'Finished with status ${status} ${mention}',
-        'color': '${color}'
-     }]
-}" | tr "'" '"' | curl -Ld @- "${webhook}"
+    'attachments': [
+        {
+            'text': 'Finished in ${diff} seconds. ${emoji} ${mention}',
+            'color': '${color}',
+            'fields': [
+                {
+                    'title': 'Hostname',
+                    'value': '$(hostname)',
+                    'short': true
+                },
+                {
+                    'title': 'Status',
+                    'value': '${status}',
+                    'short': true
+                },
+                {
+                    'title': 'Command',
+                    'value': '\`${command}\`',
+                    'short': false
+                }
+            ]
+        }
+    ]
+}
+" | tr "'" '"' | curl -Ld @- "${webhook}"
