@@ -1,0 +1,20 @@
+#!/bin/sh
+
+"$@"
+status=$?
+if [ "${status}" -eq 0 ]; then
+    color=good
+else
+    color=danger
+fi
+source ~/.btwrc
+echo " 
+{
+    'username': 'pingu', 
+    'channel': '${channel}',
+    'icon_emoji': ':penguin:',
+    'attachments': [{
+        'text': 'Finished with status ${status} ${mention}',
+        'color': '${color}'
+     }]
+}" | tr "'" '"' | curl -Ld @- "${webhook}"
