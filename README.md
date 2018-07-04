@@ -1,4 +1,4 @@
-![Screenshot](https://i.imgur.com/UQkOL9l.png)
+![Screenshot](https://i.imgur.com/PEfFS0M.png)
 
 # 🐧 pingu
 
