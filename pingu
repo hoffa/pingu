@@ -7,13 +7,15 @@ command=$@
 "$@"
 status=$?
 diff=$(echo "$(date +%s) - ${start}" | bc)
+text="Finished in ${diff} seconds."
 if [ "${status}" -eq 0 ]; then
     color=good
-    emoji="All good! :ok_hand:"
+    text="${text} All good! :ok_hand:"
 else
     color=danger
-    emoji="Exited with code ${status}... :thinking_face:"
+    text="${text} Exited with code ${status}... :thinking_face:"
 fi
+text="${text} ${mention}"
 
 echo " 
 {
@@ -22,7 +24,8 @@ echo "
     'icon_emoji': ':penguin:',
     'attachments': [
         {
-            'text': 'Finished in ${diff} seconds. ${emoji} ${mention}',
+            'fallback': '${text}',
+            'text': '${text}',
             'color': '${color}',
             'footer': '$(hostname)',
             'ts': '${start}',
