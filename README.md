@@ -20,6 +20,11 @@ chmod +x pingu
 
 ## Configuration
 
-Copy [`.pingurc`](.pingurc) to your home directory and edit the values as needed.
+Create a `.pingurc` file in your home directory similar to this (replace with correct values):
 
-If you're not too familiar with this, here's [how to create an incoming webhook](https://api.slack.com/incoming-webhooks#getting-started) and [how to find your Slack ID](https://api.slack.com/changelog/2017-09-the-one-about-usernames#mapping).
+```
+channel=@U1234ABCD
+webhook=https://hooks.slack.com/services/T02E4V78N/B2ALJAABC/aBcdEFgHi123456789lMnQLi
+```
+
+If it doesn't make much sense, here's [how to create an incoming webhook](https://api.slack.com/incoming-webhooks#getting-started) and [how to find your Slack ID](https://api.slack.com/changelog/2017-09-the-one-about-usernames#mapping).
