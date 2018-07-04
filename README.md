@@ -21,3 +21,5 @@ chmod +x pingu
 ## Configuration
 
 Copy [`.pingurc`](.pingurc) to your home directory and edit the values as needed.
+
+If you're not too familiar with this, here's [how to create an incoming webhook](https://api.slack.com/incoming-webhooks#getting-started) and [how to find your Slack ID](https://api.slack.com/changelog/2017-09-the-one-about-usernames#mapping).
