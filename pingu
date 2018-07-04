@@ -3,7 +3,7 @@
 source ~/.pingurc
 
 start=$(date +%s)
-command=$@
+command=$*
 "$@"
 status=$?
 diff=$(echo "$(date +%s) - ${start}" | bc)
