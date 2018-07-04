@@ -1,5 +1,7 @@
 # 🐧 pingu
 
+I often work on the go through SSH. `pingu` is a tiny tool that notifies you when a process finishes.
+
 ## Install
 
 ```
