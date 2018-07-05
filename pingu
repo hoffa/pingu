@@ -26,7 +26,7 @@ echo "
             'fallback': '${text}',
             'text': '${text}',
             'color': '${color}',
-            'footer': '$(hostname)',
+            'footer': '$(whoami)@$(hostname)',
             'ts': '${start}',
             'fields': [
                 {
