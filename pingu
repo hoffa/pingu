@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+fmt_diff() {
+    min=$(( $1 / 60 ))
+    sec=$(( $1 % 60 ))
+    if [[ ${min} -eq 0 ]]; then
+        echo "${sec} sec"
+    else
+        echo "${min} min ${sec} sec"
+    fi
+}
+
 source ~/.pingurc
 
 start=$(date +%s)
@@ -7,12 +17,12 @@ command=$*
 "$@"
 status=$?
 diff=$(echo "$(date +%s) - ${start}" | bc)
-text="Finished in ${diff} seconds."
-if [ "${status}" -eq 0 ]; then
-    color=good
+text="Finished in $(fmt_diff ${diff})."
+if [[ ${status} -eq 0 ]]; then
+    color="good"
     text="${text} All good! :ok_hand:"
 else
-    color=danger
+    color="danger"
     text="${text} Exited with code ${status}... :thinking_face:"
 fi
 
