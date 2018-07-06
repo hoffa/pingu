@@ -6,13 +6,13 @@ I often work on the go through SSH, and like to know when my processes finish. `
 
 ## Example
 
-```
+```Shell
 pingu docker build -t windows-xp .
 ```
 
 ## Install
 
-```
+```Shell
 cd /usr/local/bin
 curl -O https://raw.githubusercontent.com/hoffa/pingu/master/pingu
 chmod +x pingu
@@ -20,9 +20,9 @@ chmod +x pingu
 
 ## Configuration
 
-Create a `.pingurc` file in your home directory similar to this (replace with correct values):
+Create a `.pingurc` file in your home directory, with contents similar to this (replace with correct values):
 
-```
+```Shell
 channel=@U1234ABCD
 webhook=https://hooks.slack.com/services/T02E4V78N/B2ALJAABC/aBcdEFgHi123456789lMnQLi
 ```
