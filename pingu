@@ -20,10 +20,10 @@ diff=$(echo "$(date +%s) - ${start}" | bc)
 text="Finished in $(fmt_diff "${diff}")."
 if [[ ${status} -eq 0 ]]; then
     color="good"
-    text="${text} All good! :ok_hand:"
+    text=":white_check_mark: ${text} All good! :ok_hand:"
 else
     color="danger"
-    text="${text} Exited with code ${status}... :thinking_face:"
+    text=":x: ${text} Exited with code ${status}... :thinking_face:"
 fi
 
 echo " 
