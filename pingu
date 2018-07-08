@@ -17,7 +17,7 @@ command=$*
 "$@"
 status=$?
 diff=$(echo "$(date +%s) - ${start}" | bc)
-text="Finished in $(fmt_diff ${diff})."
+text="Finished in $(fmt_diff "${diff}")."
 if [[ ${status} -eq 0 ]]; then
     color="good"
     text="${text} All good! :ok_hand:"
@@ -54,3 +54,5 @@ echo "
     ]
 }
 " | tr "'" '"' | curl -sSLd @- "${webhook}"
+
+exit ${status}
