@@ -53,6 +53,6 @@ echo "
         }
     ]
 }
-" | tr "'" '"' | curl -sSLd @- "${webhook}"
+" | tr "'" '"' | curl -sSLd @- "${webhook}" > /dev/null
 
 exit ${status}
