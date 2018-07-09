@@ -13,9 +13,8 @@ pingu docker build -t windows-xp .
 ## Install
 
 ```Shell
-cd /usr/local/bin
-curl -O https://raw.githubusercontent.com/hoffa/pingu/master/pingu
-chmod +x pingu
+curl -Lo /usr/local/bin/pingu https://raw.githubusercontent.com/hoffa/pingu/master/pingu
+chmod +x /usr/local/bin/pingu
 ```
 
 ## Configuration
