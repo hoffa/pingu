@@ -7,7 +7,7 @@ I often work on the go through SSH, and like to know when my processes finish. `
 ## Example
 
 ```Shell
-pingu docker build -t windows-xp .
+pingu make
 ```
 
 ## Install
