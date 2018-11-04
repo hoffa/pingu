@@ -3,12 +3,14 @@
 fmt_diff() {
     min=$(( $1 / 60 ))
     sec=$(( $1 % 60 ))
-    if [[ ${min} -eq 0 ]]; then
-        echo "${sec} sec"
-    else
-        echo "${min} min ${sec} sec"
-    fi
+    [[ ${min} -eq 0 ]] && [[ ${sec} -eq 0 ]] && printf "less than a second"
+    [[ ${min} -eq 1 ]] && printf "${min} minute "
+    [[ ${min} -gt 1 ]] && printf "${min} minutes "
+    [[ ${sec} -eq 1 ]] && printf "${sec} second"
+    [[ ${sec} -gt 1 ]] && printf "${sec} seconds"
 }
+
+trap : INT TERM QUIT
 
 source ~/.pingurc
 
@@ -19,10 +21,10 @@ status=$?
 diff=$(echo "$(date +%s) - ${start}" | bc)
 if [[ ${status} -eq 0 ]]; then
     color="good"
-    text=":white_check_mark: All good! :ok_hand: ($(fmt_diff "${diff}"))"
+    text=":white_check_mark: All good! :ok_hand:\nTook $(fmt_diff "${diff}")."
 else
     color="danger"
-    text=":x: Exited with code ${status}... :thinking_face: ($(fmt_diff "${diff}"))"
+    text=":x: Exited with code ${status}... :thinking_face:\nTook $(fmt_diff "${diff}")."
 fi
 
 echo " 
