@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SUCCESS_EMOJIS=(":+1:" ":ok_hand:" ":clap:" ":muscle:" ":man-getting-massage:" ":woman-getting-massage:" ":v:" ":the_horns:" ":raised_hands:" ":pray:" ":heart_eyes_cat:" ":relieved:" ":innocent:" ":man_dancing:" ":nail_care:" ":ocean:")
-FAILURE_EMOJIS=(":thinking_face:" ":face_with_raised_eyebrow:" ":face_with_monocle:" ":poop:" ":speak_no_evil:" ":scream_cat:" ":man-shrugging:" ":woman-shrugging:" ":eyes:" ":fire:" ":grimacing:" ":weary:" ":face_with_hand_over_mouth:")
+FAILURE_EMOJIS=(":thinking_face:" ":face_with_raised_eyebrow:" ":face_with_monocle:" ":poop:" ":speak_no_evil:" ":scream_cat:" ":man-shrugging:" ":woman-shrugging:" ":eyes:" ":grimacing:" ":weary:" ":face_with_hand_over_mouth:")
 
 success_emoji=${SUCCESS_EMOJIS[$RANDOM % ${#SUCCESS_EMOJIS[@]}]}
 failure_emoji=${FAILURE_EMOJIS[$RANDOM % ${#FAILURE_EMOJIS[@]}]}
@@ -9,11 +9,11 @@ failure_emoji=${FAILURE_EMOJIS[$RANDOM % ${#FAILURE_EMOJIS[@]}]}
 fmt_diff() {
     min=$(( $1 / 60 ))
     sec=$(( $1 % 60 ))
-    [[ ${min} -eq 0 ]] && [[ ${sec} -eq 0 ]] && printf "less than a second"
-    [[ ${min} -eq 1 ]] && printf "${min} minute "
-    [[ ${min} -gt 1 ]] && printf "${min} minutes "
-    [[ ${sec} -eq 1 ]] && printf "${sec} second"
-    [[ ${sec} -gt 1 ]] && printf "${sec} seconds"
+    (( min == 0 )) && (( sec == 0 )) && printf "less than a second"
+    (( min == 1 )) && printf "${min} minute "
+    (( min > 1 )) && printf "${min} minutes "
+    (( sec == 1 )) && printf "${sec} second"
+    (( sec > 1 )) && printf "${sec} seconds"
 }
 
 trap : INT TERM QUIT
@@ -48,12 +48,12 @@ echo "
             'fields': [
                 {
                     'title': 'Command',
-                    'value': '\`${command}\`',
+                    'value': '${command}',
                     'short': false
                 },
                 {
                     'title': 'Directory',
-                    'value': '\`$(pwd)\`',
+                    'value': '$(pwd)',
                     'short': false
                 }
             ]
