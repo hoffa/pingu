@@ -25,10 +25,10 @@ status=$?
 diff=$(echo "$(date +%s) - ${start}" | bc)
 if [[ ${status} -eq 0 ]]; then
     color="good"
-    text=":white_check_mark: All good!\nTook $(fmt_diff "${diff}")."
+    text="All good!\nTook $(fmt_diff "${diff}")."
 else
     color="danger"
-    text=":x: Exited with code ${status}\nTook $(fmt_diff "${diff}")."
+    text="Exited with code ${status}\nTook $(fmt_diff "${diff}")."
 fi
 
 echo " 
@@ -39,17 +39,10 @@ echo "
     'attachments': [
         {
             'fallback': '${text}',
-            'text': '${text}',
+            'text': '${text}\n${command}',
             'color': '${color}',
             'footer': '$(hostname)',
-            'ts': '${start}',
-            'fields': [
-                {
-                    'title': 'Command',
-                    'value': '${command}',
-                    'short': false
-                }
-            ]
+            'ts': '${start}'
         }
     ]
 }
