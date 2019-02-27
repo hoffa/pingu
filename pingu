@@ -6,25 +6,27 @@ command=$*
 eval "$@"
 status=$?
 
-if [ $status -eq 0 ]; then
+if [ ${status} -eq 0 ]; then
     color="good"
-    text=":white_check_mark:"
+    emoji=":white_check_mark:"
 else
     color="danger"
-    text=":x:"
+    emoji=":x:"
 fi
+text="${emoji} \`${command}\`"
+fallback="${emoji} ${command}"
 
-echo "{
-    \"username\": \"pingu\",
-    \"icon_emoji\": \":penguin:\",
-    \"attachments\": [
-        {
-            \"fallback\": \"${text} ${command}\",
-            \"text\": \"${text} \`${command}\`\",
-            \"color\": \"${color}\",
-            \"footer\": \"$(hostname)\"
+echo '{
+    "username": "pingu",
+    "icon_emoji": ":penguin:",
+    "attachments": [
+         {
+            "text": "'"${text}"'",
+            "fallback": "'"${fallback}"'",
+            "color": "'"${color}"'",
+            "footer": "'"$(hostname)"'"
         }
     ]
-}" | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
+}' | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
 
 exit ${status}
