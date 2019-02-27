@@ -10,16 +10,15 @@ command=$*
 status=$?
 if [[ ${status} -eq 0 ]]; then
     color="good"
-    text="All good!"
+    text="All good"
 else
     color="danger"
-    text="Exited with code ${status}."
+    text="Exited with code ${status}"
 fi
 
 echo " 
 {
     'username': 'pingu', 
-    'channel': '${channel}',
     'icon_emoji': ':penguin:',
     'attachments': [
         {
