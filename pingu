@@ -48,11 +48,6 @@ echo "
                     'title': 'Command',
                     'value': '${command}',
                     'short': false
-                },
-                {
-                    'title': 'Directory',
-                    'value': '$(pwd)',
-                    'short': false
                 }
             ]
         }
