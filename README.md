@@ -1,8 +1,8 @@
-# 🐧 pingu
+# pingu
 
 [![Build Status](https://travis-ci.org/hoffa/pingu.svg?branch=master)](https://travis-ci.org/hoffa/pingu)
 
-I often work on the go through SSH, and like to know when my processes finish. `pingu` helps with that.
+`pingu` lets you know when your long-running process finishes.
 
 ## Example
 
