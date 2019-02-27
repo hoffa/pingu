@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-SUCCESS_EMOJIS=(":+1:" ":ok_hand:" ":clap:" ":muscle:" ":man-getting-massage:" ":woman-getting-massage:" ":v:" ":the_horns:" ":raised_hands:" ":pray:" ":heart_eyes_cat:" ":relieved:" ":innocent:" ":man_dancing:" ":nail_care:" ":ocean:")
-FAILURE_EMOJIS=(":thinking_face:" ":face_with_raised_eyebrow:" ":face_with_monocle:" ":poop:" ":speak_no_evil:" ":scream_cat:" ":man-shrugging:" ":woman-shrugging:" ":eyes:" ":grimacing:" ":weary:" ":face_with_hand_over_mouth:")
-
-success_emoji=${SUCCESS_EMOJIS[$RANDOM % ${#SUCCESS_EMOJIS[@]}]}
-failure_emoji=${FAILURE_EMOJIS[$RANDOM % ${#FAILURE_EMOJIS[@]}]}
-
 fmt_diff() {
     min=$(( $1 / 60 ))
     sec=$(( $1 % 60 ))
@@ -27,10 +21,10 @@ status=$?
 diff=$(echo "$(date +%s) - ${start}" | bc)
 if [[ ${status} -eq 0 ]]; then
     color="good"
-    text=":white_check_mark: All good! ${success_emoji}\nTook $(fmt_diff "${diff}")."
+    text=":white_check_mark: All good!\nTook $(fmt_diff "${diff}")."
 else
     color="danger"
-    text=":x: Exited with code ${status}... ${failure_emoji}\nTook $(fmt_diff "${diff}")."
+    text=":x: Exited with code ${status}\nTook $(fmt_diff "${diff}")."
 fi
 
 echo " 
