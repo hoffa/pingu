@@ -6,7 +6,7 @@
 
 `pingu` lets you know when your process finishes.
 
-It'll run on pretty much any POSIX system.
+It'll run on any POSIX system with `curl`.
 
 ## Example
 
