@@ -1,12 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 trap : INT TERM QUIT
 
 source ~/.pingurc
-
-# want to see whole message in noti if possible...
-# don't care that much what the actual code was 
-# just show success/failure emoji!
 
 command=$*
 "$@"
@@ -20,17 +16,17 @@ fi
 
 echo " 
 {
-    'username': 'pingu', 
-    'icon_emoji': ':penguin:',
-    'attachments': [
+    \"username\": \"pingu\",
+    \"icon_emoji\": \":penguin:\",
+    \"attachments\": [
         {
-            'fallback': '${text} ${command}',
-            'text': '${text} \`${command}\`',
-            'color': '${color}',
-            'footer': '$(hostname)'
+            \"fallback\": \"${text} ${command}\",
+            \"text\": \"${text} \`${command}\`\",
+            \"color\": \"${color}\",
+            \"footer\": \"$(hostname)\"
         }
     ]
 }
-" | tr "'" '"' | curl -sSLd @- "${webhook}" > /dev/null
+" | curl -sSLd @- "${webhook}" > /dev/null
 
 exit ${status}
