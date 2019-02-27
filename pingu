@@ -1,19 +1,5 @@
 #!/usr/bin/env bash
 
-# uses bc, bash arith, printf, trap, date, tr, curl
-# remove bc, bash arith, 
-# hmm no bc so no duration stuff
-
-fmt_diff() {
-    min=$(( $1 / 60 ))
-    sec=$(( $1 % 60 ))
-    (( min == 0 )) && (( sec == 0 )) && printf "less than a second"
-    (( min == 1 )) && printf "${min} minute "
-    (( min > 1 )) && printf "${min} minutes "
-    (( sec == 1 )) && printf "${sec} second"
-    (( sec > 1 )) && printf "${sec} seconds"
-}
-
 trap : INT TERM QUIT
 
 source ~/.pingurc
@@ -22,13 +8,12 @@ start=$(date +%s)
 command=$*
 "$@"
 status=$?
-diff=$(echo "$(date +%s) - ${start}" | bc)
 if [[ ${status} -eq 0 ]]; then
     color="good"
-    text="All good!\nTook $(fmt_diff "${diff}")."
+    text="All good!"
 else
     color="danger"
-    text="Exited with code ${status}\nTook $(fmt_diff "${diff}")."
+    text="Exited with code ${status}."
 fi
 
 echo " 
