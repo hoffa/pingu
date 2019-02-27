@@ -2,8 +2,6 @@
 
 trap : INT TERM QUIT
 
-source ~/.pingurc
-
 command=$*
 "$@"
 if [ $? -eq 0 ]; then
@@ -27,6 +25,6 @@ echo "
         }
     ]
 }
-" | curl -sSLd @- "${webhook}" > /dev/null
+" | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
 
 exit ${status}
