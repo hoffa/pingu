@@ -4,16 +4,19 @@ trap : INT TERM QUIT
 
 source ~/.pingurc
 
+# want to see whole message in noti if possible...
+# don't care that much what the actual code was 
+# just show success/failure emoji!
+
 start=$(date +%s)
 command=$*
 "$@"
-status=$?
-if [[ ${status} -eq 0 ]]; then
+if [ $? -eq 0 ]; then
     color="good"
-    text="All good"
+    text=":white_check_mark:"
 else
     color="danger"
-    text="Exited with code ${status}"
+    text=":x:"
 fi
 
 echo " 
@@ -22,8 +25,8 @@ echo "
     'icon_emoji': ':penguin:',
     'attachments': [
         {
-            'fallback': '${text}',
-            'text': '${text}\n${command}',
+            'fallback': '${text} ${command}',
+            'text': '${text} \`${command}\`',
             'color': '${color}',
             'footer': '$(hostname)',
             'ts': '${start}'
