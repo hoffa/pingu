@@ -4,8 +4,9 @@ trap : INT TERM QUIT
 
 command=$*
 eval "$@"
+status=$?
 
-if [ $? -eq 0 ]; then
+if [ $status -eq 0 ]; then
     color="good"
     text=":white_check_mark:"
 else
