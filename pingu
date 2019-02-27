@@ -3,7 +3,8 @@
 trap : INT TERM QUIT
 
 command=$*
-"$@"
+eval "$@"
+
 if [ $? -eq 0 ]; then
     color="good"
     text=":white_check_mark:"
@@ -12,8 +13,7 @@ else
     text=":x:"
 fi
 
-echo " 
-{
+echo "{
     \"username\": \"pingu\",
     \"icon_emoji\": \":penguin:\",
     \"attachments\": [
@@ -24,7 +24,6 @@ echo "
             \"footer\": \"$(hostname)\"
         }
     ]
-}
-" | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
+}" | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
 
 exit ${status}
