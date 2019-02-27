@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# uses bc, bash arith, printf, trap, date, tr, curl
+# remove bc, bash arith, 
+# hmm no bc so no duration stuff
+
 fmt_diff() {
     min=$(( $1 / 60 ))
     sec=$(( $1 % 60 ))
@@ -37,7 +41,7 @@ echo "
             'fallback': '${text}',
             'text': '${text}',
             'color': '${color}',
-            'footer': '$(whoami)@$(hostname)',
+            'footer': '$(hostname)',
             'ts': '${start}',
             'fields': [
                 {
