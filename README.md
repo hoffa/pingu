@@ -21,4 +21,4 @@ curl -Lo /usr/local/bin/pingu https://raw.githubusercontent.com/hoffa/pingu/mast
 chmod +x /usr/local/bin/pingu
 ```
 
-You'll need to create an [Incoming Webhook](https://api.slack.com/incoming-webhooks) and pass the URL to `pingu` using the `SLACK_WEBHOOK_URL` environment variable. Or you can just `export` the variable when initializing the shell.
+You'll need to create an [Incoming Webhook](https://api.slack.com/incoming-webhooks) and pass the URL to `pingu` using the `SLACK_WEBHOOK_URL` environment variable. Or you can just `export` the variable during shell initialization.
