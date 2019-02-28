@@ -6,7 +6,6 @@ escape() {
     echo "$1" | sed 's/"/\\"/g'
 }
 
-command=$*
 eval "$@"
 status=$?
 
@@ -17,8 +16,8 @@ else
     color="danger"
     emoji=":x:"
 fi
-text=$(escape "${emoji} \`${command}\`")
-fallback=$(escape "${emoji} ${command}")
+text=$(escape "${emoji} \`$*\`")
+fallback=$(escape "${emoji} $*")
 
 echo '{
     "username": "pingu",
