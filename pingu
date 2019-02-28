@@ -2,6 +2,10 @@
 
 trap : INT TERM QUIT
 
+escape() {
+    echo "$1" | sed 's/"/\\"/g'
+}
+
 command=$*
 eval "$@"
 status=$?
@@ -13,8 +17,8 @@ else
     color="danger"
     emoji=":x:"
 fi
-text="${emoji} \`${command}\`"
-fallback="${emoji} ${command}"
+text=$(escape "${emoji} \`${command}\`")
+fallback=$(escape "${emoji} ${command}")
 
 echo '{
     "username": "pingu",
