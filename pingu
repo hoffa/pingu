@@ -27,7 +27,7 @@ echo '{
             "text": "'"${text}"'",
             "fallback": "'"${fallback}"'",
             "color": "'"${color}"'",
-            "footer": "'"$(hostname) | $(whoami)"'"
+            "footer": "'"$(uname -n) | $(id -un)"'"
         }
     ]
 }' | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
