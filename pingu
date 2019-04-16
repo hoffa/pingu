@@ -3,7 +3,7 @@
 trap : INT TERM QUIT
 
 escape() {
-    echo "$1" | sed 's/"/\\"/g'
+    sed 's/"/\\"/g'
 }
 
 eval "$@"
@@ -16,8 +16,8 @@ else
     color="danger"
     emoji=":x:"
 fi
-text=$(escape "${emoji} \`$*\`")
-fallback=$(escape "${emoji} $*")
+text=$(echo "${emoji} \`$*\`" | escape)
+fallback=$(echo "${emoji} $*" | escape)
 
 echo '{
     "username": "pingu",
