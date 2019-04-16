@@ -18,6 +18,7 @@ else
 fi
 text=$(echo "${emoji} \`$*\`" | escape)
 fallback=$(echo "${emoji} $*" | escape)
+footer=$(id -un)@$(uname -n)
 
 echo '{
     "username": "pingu",
@@ -27,7 +28,7 @@ echo '{
             "text": "'"${text}"'",
             "fallback": "'"${fallback}"'",
             "color": "'"${color}"'",
-            "footer": "'"$(id -un)@$(uname -n)"'"
+            "footer": "'"${footer}"'"
         }
     ]
 }' | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
