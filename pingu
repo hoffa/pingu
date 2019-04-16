@@ -20,17 +20,19 @@ text=$(echo "${emoji} \`$*\`" | escape)
 fallback=$(echo "${emoji} $*" | escape)
 footer=$(id -un)@$(uname -n)
 
-echo '{
-    "username": "pingu",
-    "icon_emoji": ":penguin:",
-    "attachments": [
-         {
-            "text": "'"${text}"'",
-            "fallback": "'"${fallback}"'",
-            "color": "'"${color}"'",
-            "footer": "'"${footer}"'"
-        }
-    ]
-}' | curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null
+curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null << EOF
+{
+  "username": "pingu",
+  "icon_emoji": ":penguin:",
+  "attachments": [
+    {
+      "text": "${text}",
+      "fallback": "${fallback}",
+      "color": "${color}",
+      "footer": "${footer}"
+    }
+  ]
+}
+EOF
 
 exit ${status}
