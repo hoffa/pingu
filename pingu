@@ -2,37 +2,67 @@
 
 trap : INT TERM QUIT
 
+eval "$@"
+status=$?
+
 escape() {
 	sed 's/"/\\"/g'
 }
 
-eval "$@"
-status=$?
+# $1: text
+send_chime_message() {
+	if [ -n "${CHIME_WEBHOOK_URL}" ]; then
+		curl \
+			-sSL \
+			--header "Content-Type: application/json" \
+			--data @- \
+			"${CHIME_WEBHOOK_URL}" >/dev/null <<EOF
+{
+  "Content": "$(echo "$1" | escape)"
+}
+EOF
+	fi
+}
 
-if [ ${status} -eq 0 ]; then
-	color="good"
-	emoji=":white_check_mark:"
-else
-	color="danger"
-	emoji=":x:"
-fi
-text=$(echo "${emoji} \`$*\`" | escape)
-fallback=$(echo "${emoji} $*" | escape)
-footer=$(id -un)@$(uname -n)
-
-curl -sSLd @- "${SLACK_WEBHOOK_URL}" >/dev/null <<EOF
+# $1: text
+# $2: fallback
+# $3: footer
+# $4: color
+send_slack_message() {
+	if [ -n "${SLACK_WEBHOOK_URL}" ]; then
+		curl \
+			-sSL \
+			--header "Content-Type: application/json" \
+			--data @- \
+			"${SLACK_WEBHOOK_URL}" >/dev/null <<EOF
 {
   "username": "pingu",
   "icon_emoji": ":penguin:",
   "attachments": [
     {
-      "text": "${text}",
-      "fallback": "${fallback}",
-      "color": "${color}",
-      "footer": "${footer}"
+      "text": "$(echo "$1" | escape)",
+      "fallback": "$(echo "$2" | escape)",
+      "footer": "$(echo "$3" | escape)",
+      "color": "$(echo "$4" | escape)"
     }
   ]
 }
 EOF
+	fi
+}
+
+if [ ${status} -eq 0 ]; then
+	color="good"
+	emoji="✅"
+else
+	color="danger"
+	emoji="❌"
+fi
+text="${emoji} \`$*\`"
+fallback="${emoji} $*"
+footer=$(id -un)@$(uname -n)
+
+send_chime_message "${fallback}"
+send_slack_message "${text}" "${fallback}" "${footer}" "${color}"
 
 exit ${status}
