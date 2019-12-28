@@ -3,24 +3,24 @@
 trap : INT TERM QUIT
 
 escape() {
-    sed 's/"/\\"/g'
+	sed 's/"/\\"/g'
 }
 
 eval "$@"
 status=$?
 
 if [ ${status} -eq 0 ]; then
-    color="good"
-    emoji=":white_check_mark:"
+	color="good"
+	emoji=":white_check_mark:"
 else
-    color="danger"
-    emoji=":x:"
+	color="danger"
+	emoji=":x:"
 fi
 text=$(echo "${emoji} \`$*\`" | escape)
 fallback=$(echo "${emoji} $*" | escape)
 footer=$(id -un)@$(uname -n)
 
-curl -sSLd @- "${SLACK_WEBHOOK_URL}" > /dev/null << EOF
+curl -sSLd @- "${SLACK_WEBHOOK_URL}" >/dev/null <<EOF
 {
   "username": "pingu",
   "icon_emoji": ":penguin:",
