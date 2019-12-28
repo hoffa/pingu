@@ -3,10 +3,10 @@
 trap : INT TERM QUIT
 
 eval "$@"
-status=$?
+cmd_status=$?
 
 # Escape double quotes
-escape() {
+escape_quotes() {
 	sed 's/"/\\"/g'
 }
 
@@ -27,7 +27,7 @@ send_chime_message() {
 	if [ -n "${CHIME_WEBHOOK_URL}" ]; then
 		curl_post_json "${CHIME_WEBHOOK_URL}" <<EOF
 {
-  "Content": "$(echo "$1" | escape)"
+  "Content": "$(echo "$1" | escape_quotes)"
 }
 EOF
 	fi
@@ -46,10 +46,10 @@ send_slack_message() {
   "icon_emoji": ":penguin:",
   "attachments": [
     {
-      "text": "$(echo "$1" | escape)",
-      "fallback": "$(echo "$2" | escape)",
-      "footer": "$(echo "$3" | escape)",
-      "color": "$(echo "$4" | escape)"
+      "text": "$(echo "$1" | escape_quotes)",
+      "fallback": "$(echo "$2" | escape_quotes)",
+      "footer": "$(echo "$3" | escape_quotes)",
+      "color": "$(echo "$4" | escape_quotes)"
     }
   ]
 }
@@ -57,7 +57,7 @@ EOF
 	fi
 }
 
-if [ ${status} -eq 0 ]; then
+if [ ${cmd_status} -eq 0 ]; then
 	color="good"
 	emoji="✅"
 else
@@ -71,4 +71,4 @@ footer=$(id -un)@$(uname -n)
 send_slack_message "${text}" "${fallback}" "${footer}" "${color}"
 send_chime_message "${fallback}"
 
-exit ${status}
+exit ${cmd_status}
