@@ -9,14 +9,20 @@ escape() {
 	sed 's/"/\\"/g'
 }
 
+# $1: URL
+# stdin: JSON data
+curl_post_json() {
+	curl \
+		-sSL \
+		--header "Content-Type: application/json" \
+		--data @- \
+		"$1" >/dev/null
+}
+
 # $1: text
 send_chime_message() {
 	if [ -n "${CHIME_WEBHOOK_URL}" ]; then
-		curl \
-			-sSL \
-			--header "Content-Type: application/json" \
-			--data @- \
-			"${CHIME_WEBHOOK_URL}" >/dev/null <<EOF
+		curl_post_json "${CHIME_WEBHOOK_URL}" <<EOF
 {
   "Content": "$(echo "$1" | escape)"
 }
@@ -30,11 +36,7 @@ EOF
 # $4: color
 send_slack_message() {
 	if [ -n "${SLACK_WEBHOOK_URL}" ]; then
-		curl \
-			-sSL \
-			--header "Content-Type: application/json" \
-			--data @- \
-			"${SLACK_WEBHOOK_URL}" >/dev/null <<EOF
+		curl_post_json "${SLACK_WEBHOOK_URL}" <<EOF
 {
   "username": "pingu",
   "icon_emoji": ":penguin:",
