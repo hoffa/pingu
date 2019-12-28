@@ -4,17 +4,29 @@
 
 pingu lets you know when your process finishes.
 
-Works on any POSIX system with `curl`.
+Supports Slack and Chime. Works on any POSIX system with `curl`.
+
+## Usage
+
+```shell
+pingu <command>
+```
+
+Either `SLACK_WEBHOOK_URL` or `CHIME_WEBHOOK_URL` must be set.
+
+See relevant docs to create webhook URLs:
+- [Slack](https://api.slack.com/incoming-webhooks)
+- [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html)
 
 ## Example
 
-```Shell
-pingu make
+```shell
+pingu docker build -t windows .
 ```
 
 ## Installation
 
-```Shell
+```shell
 curl -Lo /usr/local/bin/pingu https://raw.githubusercontent.com/hoffa/pingu/master/pingu
 chmod +x /usr/local/bin/pingu
 ```
