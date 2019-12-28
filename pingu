@@ -5,10 +5,12 @@ trap : INT TERM QUIT
 eval "$@"
 status=$?
 
+# Escape double quotes
 escape() {
 	sed 's/"/\\"/g'
 }
 
+# Send POST request with JSON body
 # $1: URL
 # stdin: JSON data
 curl_post_json() {
@@ -19,6 +21,7 @@ curl_post_json() {
 		"$1" >/dev/null
 }
 
+# Send message to Chime
 # $1: text
 send_chime_message() {
 	if [ -n "${CHIME_WEBHOOK_URL}" ]; then
@@ -30,6 +33,7 @@ EOF
 	fi
 }
 
+# Send message to Slack
 # $1: text
 # $2: fallback
 # $3: footer
@@ -64,7 +68,7 @@ text="${emoji} \`$*\`"
 fallback="${emoji} $*"
 footer=$(id -un)@$(uname -n)
 
-send_chime_message "${fallback}"
 send_slack_message "${text}" "${fallback}" "${footer}" "${color}"
+send_chime_message "${fallback}"
 
 exit ${status}
