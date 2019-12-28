@@ -20,7 +20,9 @@ chmod +x /usr/local/bin/pingu
 pingu <command>
 ```
 
-Either `SLACK_WEBHOOK_URL` or `CHIME_WEBHOOK_URL` must be set. See relevant docs on how to generate webhook URLs:
+Either `SLACK_WEBHOOK_URL` or `CHIME_WEBHOOK_URL` must be set.
+
+Relevant docs on how to generate webhook URLs:
 - [Slack](https://api.slack.com/incoming-webhooks)
 - [Chime](https://docs.aws.amazon.com/chime/latest/ug/webhooks.html)
 
