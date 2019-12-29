@@ -1,4 +1,4 @@
-# :penguin: pingu
+# pingu
 
 [![Build Status](https://travis-ci.org/hoffa/pingu.svg?branch=master)](https://travis-ci.org/hoffa/pingu)
 
