@@ -1,6 +1,6 @@
 # pingu
 
-[![Build Status](https://travis-ci.com/hoffa/pingu.svg?branch=master)](https://travis-ci.org/hoffa/pingu)
+[![Build Status](https://github.com/hoffa/pingu/workflows/.github/workflows/workflow.yml/badge.svg)](https://github.com/hoffa/pingu/actions)
 
 pingu lets you know when your process finishes.
 
