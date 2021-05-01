@@ -21,18 +21,6 @@ curl_post_json() {
 		"$1" >/dev/null
 }
 
-# Send message to Chime
-# $1: text
-send_chime_message() {
-	if [ -n "${CHIME_WEBHOOK_URL}" ]; then
-		curl_post_json "${CHIME_WEBHOOK_URL}" <<EOF
-{
-  "Content": "$(echo "$1" | escape_quotes)"
-}
-EOF
-	fi
-}
-
 # Send message to Slack
 # $1: text
 # $2: fallback
@@ -69,6 +57,5 @@ fallback="${emoji} $*"
 footer=$(id -un)@$(uname -n)
 
 send_slack_message "${text}" "${fallback}" "${footer}" "${color}"
-send_chime_message "${fallback}"
 
 exit ${cmd_status}
