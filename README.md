@@ -1,7 +1,5 @@
 # pingu
 
-[![Build Status](https://github.com/hoffa/pingu/workflows/.github/workflows/workflow.yml/badge.svg)](https://github.com/hoffa/pingu/actions)
-
 pingu lets you know when your process finishes.
 
 Supports Slack and Chime. Works on any POSIX system with `curl`.
